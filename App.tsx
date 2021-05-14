@@ -1,21 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler"
 
-export default function App() {
+import React from "react"
+
+import * as eva from "@eva-design/eva"
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components"
+import { EvaIconsPack } from "@ui-kitten/eva-icons"
+
+import { AuthProvider } from "./src/hooks/useAuth"
+import { ThemeContext, useThemeProvider } from "./src/hooks/useThemeSwitch"
+import Router from "./src/navigation/Router"
+
+function App() {
+  const themeContext = useThemeProvider()
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ThemeContext.Provider value={themeContext}>
+        <AuthProvider>
+          <ApplicationProvider {...eva} theme={eva[themeContext.themeName]}>
+            <Router />
+          </ApplicationProvider>
+        </AuthProvider>
+      </ThemeContext.Provider>
+    </>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App
