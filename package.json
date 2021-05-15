@@ -9,7 +9,8 @@
     "lint": "eslint --ext .ts,.tsx,.js,.jsx src",
     "tsc": "tsc --noEmit",
     "clean": "rm -rf node_modules && npm cache clean --force",
-    "upgrade-interactive": "npm-check --update"
+    "upgrade-interactive": "npm-check --update", 
+    "publish": "expo publish"
   },
   "dependencies": {
     "@eva-design/eva": "^2.1.0",
@@ -59,5 +60,5 @@
     "prettier": "^2.3.0",
     "typescript": "^4.2.4"
   },
-  "private": true
+  "private": false
 }

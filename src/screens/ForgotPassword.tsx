@@ -15,6 +15,7 @@ import {
 } from "../components/FormUtils"
 import PageLayout from "../components/PageLayout"
 import { useAuth } from "../hooks/useAuth"
+import { RouteID } from "../Router/Routes"
 
 interface ForgotPasswordProps {
   email: string
@@ -51,10 +52,10 @@ const ForgotPasswordScreen = () => {
       })
   })
 
-  const goToLogin = () => navigation.navigate("Login")
+  const goToLogin = () => navigation.navigate(RouteID.LOGIN)
 
   useEffect(() => {
-    if (user) navigation.navigate("Profile")
+    if (user) navigation.navigate(RouteID.PROFILE)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 

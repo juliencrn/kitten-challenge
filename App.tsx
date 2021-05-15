@@ -8,7 +8,7 @@ import { EvaIconsPack } from "@ui-kitten/eva-icons"
 
 import { AuthProvider } from "./src/hooks/useAuth"
 import { ThemeContext, useThemeProvider } from "./src/hooks/useThemeSwitch"
-import Router from "./src/navigation/Router"
+import Router from "./src/Router/Router"
 
 function App() {
   const themeContext = useThemeProvider()

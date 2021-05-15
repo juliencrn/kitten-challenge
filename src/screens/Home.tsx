@@ -5,6 +5,7 @@ import { Button, Layout, Text } from "@ui-kitten/components"
 import { SafeAreaView, StyleSheet, View } from "react-native"
 
 import { useAuth } from "../hooks/useAuth"
+import { RouteID } from "../Router/Routes"
 
 const heartIcons = ["😻", "💖", "😍", "🥰", "😍", "💝", "😘", "💓", "💕", "🐱"]
 
@@ -18,10 +19,10 @@ const HomeScreen = () => {
     setIcon(heartIcons[index])
   }
 
-  const goToDetails = () => navigation.navigate("Details")
-  const goToLogin = () => navigation.navigate("Login")
-  const goToRegister = () => navigation.navigate("Register")
-  const goToProfile = () => navigation.navigate("Profile")
+  const goToDetails = () => navigation.navigate(RouteID.DETAILS)
+  const goToLogin = () => navigation.navigate(RouteID.LOGIN)
+  const goToRegister = () => navigation.navigate(RouteID.REGISTER)
+  const goToProfile = () => navigation.navigate(RouteID.PROFILE)
 
   return (
     <Layout style={{ flex: 1 }}>

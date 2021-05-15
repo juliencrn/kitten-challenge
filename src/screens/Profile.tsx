@@ -14,15 +14,17 @@ import { View } from "react-native"
 import { BackArrow, SettingsLink } from "../components/NavigationActions"
 import PageLayout from "../components/PageLayout"
 import { useAuth } from "../hooks/useAuth"
+import { RouteID } from "../Router/Routes"
 
 const ProfileScreen = () => {
   const { user } = useAuth()
   const navigation = useNavigation()
   const styles = useStyleSheet(themedStyles)
 
-  const goToCreateChallenge = () => navigation.navigate("CreateChallenge")
-  const goToSettings = () => navigation.navigate("ProfileSettings")
-  const goToMyChallenges = () => navigation.navigate("MyChallenges")
+  const goToCreateChallenge = () =>
+    navigation.navigate(RouteID.CREATE_CHALLENGE)
+  const goToSettings = () => navigation.navigate(RouteID.PROFILE_SETTINGS)
+  const goToMyChallenges = () => navigation.navigate(RouteID.MY_CHALLENGES)
 
   return (
     <PageLayout pageTitle="Profile" disableTopNavigation>
