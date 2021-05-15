@@ -2,19 +2,18 @@ import React, { useEffect, useState } from "react"
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigation } from "@react-navigation/native"
-import { Button, Divider, Layout, TopNavigation } from "@ui-kitten/components"
+import { Button } from "@ui-kitten/components"
 import { Controller, useForm } from "react-hook-form"
-import { SafeAreaView, StyleSheet, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import * as yup from "yup"
 
-import BackArrow from "../components/BackArrow"
 import {
   EmailInput,
   formStyles,
   getFormValidators,
   TextError,
 } from "../components/FormUtils"
-import Header from "../components/Header"
+import PageLayout from "../components/PageLayout"
 import { useAuth } from "../hooks/useAuth"
 
 interface ForgotPasswordProps {
@@ -62,60 +61,50 @@ const ForgotPasswordScreen = () => {
   const { errors } = formState
 
   return (
-    <Layout style={{ flex: 1 }}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <TopNavigation
-          title="Restore password"
-          alignment="center"
-          accessoryLeft={BackArrow}
-        />
-        <Divider />
-        <View style={{ flex: 1 }}>
-          {mailSent ? (
-            <Header
-              title="Mail sent"
-              subtitle="Check your email and come back to login."
-            />
-          ) : (
-            <>
-              <Header title="Restore Password" />
-
-              <Layout style={formStyles.formContainer} level="1">
-                <Controller
-                  control={control}
-                  name="email"
-                  render={({ field: { onChange, ...inputProps } }) => (
-                    <EmailInput
-                      {...inputProps}
-                      onChangeText={value => onChange(value)}
-                      status={errors.email ? "danger" : undefined}
-                    />
-                  )}
+    <PageLayout
+      pageTitle="Restore passwor"
+      headerProps={
+        mailSent
+          ? {
+              title: "Mail sent",
+              subtitle: "Check your email and come back to login.",
+            }
+          : { title: "Restore Password" }
+      }
+    >
+      {!mailSent && (
+        <>
+          <View style={formStyles.formContainer}>
+            <Controller
+              control={control}
+              name="email"
+              render={({ field: { onChange, ...inputProps } }) => (
+                <EmailInput
+                  {...inputProps}
+                  onChangeText={value => onChange(value)}
+                  status={errors.email ? "danger" : undefined}
                 />
+              )}
+            />
 
-                <TextError message={errors.email?.message} />
-              </Layout>
+            <TextError message={errors.email?.message} />
+          </View>
 
-              <Button
-                onPress={onSubmit}
-                style={styles.submitButton}
-                size="giant"
-              >
-                SEND RESET INSTRUCTIONS
-              </Button>
-            </>
-          )}
-          <Button
-            style={styles.backToLoginButton}
-            appearance="ghost"
-            status="basic"
-            onPress={goToLogin}
-          >
-            BACK TO LOGIN
+          <Button onPress={onSubmit} style={styles.submitButton} size="giant">
+            SEND RESET INSTRUCTIONS
           </Button>
-        </View>
-      </SafeAreaView>
-    </Layout>
+        </>
+      )}
+
+      <Button
+        style={styles.backToLoginButton}
+        appearance="ghost"
+        status="basic"
+        onPress={goToLogin}
+      >
+        BACK TO LOGIN
+      </Button>
+    </PageLayout>
   )
 }
 

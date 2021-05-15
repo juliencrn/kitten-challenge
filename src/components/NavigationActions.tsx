@@ -3,7 +3,7 @@ import React from "react"
 import { useNavigation } from "@react-navigation/native"
 import { Icon, TopNavigationAction } from "@ui-kitten/components"
 
-function BackArrow() {
+export function BackArrow() {
   const navigation = useNavigation()
 
   const navigateBack = () => navigation.goBack()
@@ -16,4 +16,15 @@ function BackArrow() {
   )
 }
 
-export default BackArrow
+export function SettingsLink() {
+  const navigation = useNavigation()
+
+  const navigateBack = () => navigation.navigate("ProfileSettings")
+
+  return (
+    <TopNavigationAction
+      icon={props => <Icon {...props} name="settings-outline" />}
+      onPress={navigateBack}
+    />
+  )
+}

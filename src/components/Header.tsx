@@ -3,7 +3,7 @@ import React from "react"
 import { StyleService, Text, useStyleSheet } from "@ui-kitten/components"
 import { View } from "react-native"
 
-interface HeaderProps {
+export interface HeaderProps {
   title: string
   subtitle?: string
 }

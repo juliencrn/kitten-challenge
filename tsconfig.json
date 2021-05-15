@@ -1,7 +1,18 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "target": "es2019",
+    "module": "commonjs",
+    "baseUrl": ".",
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "jsx": "react",
+    "skipLibCheck": true,
+    "typeRoots": ["./types", "./node_modules/@types"],
   },
-  "typeRoots": ["./src/types"],
+  "include": ["src/**/*", "App.tsx", "forks/**/*"],
+  "exclude": ["build", "node_modules", "jest.config.js", "typings"],
+  "types": ["react", "react-native"]
 }

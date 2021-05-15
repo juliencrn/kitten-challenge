@@ -1,28 +1,20 @@
 import React, { useEffect } from "react"
 
-import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigation } from "@react-navigation/native"
-import {
-  Button,
-  Divider,
-  Icon,
-  Input,
-  Layout,
-  TopNavigation,
-} from "@ui-kitten/components"
+import { Button } from "@ui-kitten/components"
 import { Controller, ErrorOption, useForm } from "react-hook-form"
-import { SafeAreaView, StyleSheet, View } from "react-native"
-import * as yup from "yup"
+import { StyleSheet, View } from "react-native"
 
-import BackArrow from "../components/BackArrow"
 import {
   EmailInput,
   formStyles,
   getFormValidators,
   PasswordInput,
   TextError,
+  yup,
+  yupResolver,
 } from "../components/FormUtils"
-import Header from "../components/Header"
+import PageLayout from "../components/PageLayout"
 import { useAuth } from "../hooks/useAuth"
 
 interface LoginProps {
@@ -32,7 +24,7 @@ interface LoginProps {
 
 const defaultValues: LoginProps = {
   email: "juliencaron@protonmail.com",
-  password: "Harry@113",
+  password: "Te$t1234",
 }
 
 const { email, password } = getFormValidators()
@@ -67,7 +59,7 @@ const LoginScreen = () => {
   const onSubmit = handleSubmit(async (data: LoginProps) => {
     const { email, password } = data
 
-    login(email, password).catch((res: any) => {
+    login({ email, password }).catch((res: any) => {
       const error = formatError(res)
       if (error) setError(...error)
     })
@@ -84,75 +76,66 @@ const LoginScreen = () => {
   const { errors } = formState
 
   return (
-    <Layout style={{ flex: 1 }}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <TopNavigation
-          title="Login"
-          alignment="center"
-          accessoryLeft={BackArrow}
+    <PageLayout
+      pageTitle="Login"
+      headerProps={{
+        title: "You're come back!",
+        subtitle: "Sign in to your account",
+      }}
+    >
+      <View style={formStyles.formContainer}>
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, ...inputProps } }) => (
+            <EmailInput
+              {...inputProps}
+              onChangeText={value => onChange(value)}
+              status={errors.email ? "danger" : undefined}
+            />
+          )}
         />
-        <Divider />
-        <View style={{ flex: 1 }}>
-          <Header
-            title="You're come back!"
-            subtitle="Sign in to your account"
-          />
 
-          <Layout style={formStyles.formContainer} level="1">
-            <Controller
-              control={control}
-              name="email"
-              render={({ field: { onChange, ...inputProps } }) => (
-                <EmailInput
-                  {...inputProps}
-                  onChangeText={value => onChange(value)}
-                  status={errors.email ? "danger" : undefined}
-                />
-              )}
+        <TextError message={errors.email?.message} />
+
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, ...inputProps } }) => (
+            <PasswordInput
+              {...inputProps}
+              style={formStyles.input}
+              onChangeText={value => onChange(value)}
+              status={errors.password ? "danger" : undefined}
             />
+          )}
+        />
 
-            <TextError message={errors.email?.message} />
-
-            <Controller
-              control={control}
-              name="password"
-              render={({ field: { onChange, ...inputProps } }) => (
-                <PasswordInput
-                  {...inputProps}
-                  style={formStyles.input}
-                  onChangeText={value => onChange(value)}
-                  status={errors.password ? "danger" : undefined}
-                />
-              )}
-            />
-
-            <TextError message={errors.password?.message} />
-            <View style={styles.forgotPasswordContainer}>
-              <Button
-                style={styles.forgotPasswordButton}
-                appearance="ghost"
-                status="basic"
-                onPress={goToForgotPassword}
-              >
-                Forgot your password?
-              </Button>
-            </View>
-          </Layout>
-
-          <Button onPress={onSubmit} style={styles.signInButton} size="giant">
-            SIGN IN
-          </Button>
+        <TextError message={errors.password?.message} />
+        <View style={styles.forgotPasswordContainer}>
           <Button
-            style={styles.signUpButton}
+            style={styles.forgotPasswordButton}
             appearance="ghost"
             status="basic"
-            onPress={goToRegister}
+            onPress={goToForgotPassword}
           >
-            Don't have an account? Create
+            Forgot your password?
           </Button>
         </View>
-      </SafeAreaView>
-    </Layout>
+      </View>
+
+      <Button onPress={onSubmit} style={styles.signInButton} size="giant">
+        SIGN IN
+      </Button>
+      <Button
+        style={styles.signUpButton}
+        appearance="ghost"
+        status="basic"
+        onPress={goToRegister}
+      >
+        {`Don't have an account? Create`}
+      </Button>
+    </PageLayout>
   )
 }
 

@@ -2,6 +2,7 @@ import React from "react"
 
 import { createStackNavigator } from "@react-navigation/stack"
 
+import DetailsScreen from "../screens/Details"
 import ForgotPasswordScreen from "../screens/ForgotPassword"
 import HomeScreen from "../screens/Home"
 import LoginScreen from "../screens/Login"
@@ -13,6 +14,7 @@ export default function LoggedOutStack() {
   return (
     <Navigator headerMode="none">
       <Screen name="Home" component={HomeScreen} />
+      <Screen name="Details" component={DetailsScreen} />
       <Screen name="Login" component={LoginScreen} />
       <Screen name="Register" component={RegisterScreen} />
       <Screen name="ForgotPassword" component={ForgotPasswordScreen} />

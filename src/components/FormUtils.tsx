@@ -1,5 +1,6 @@
-import React, { FC, ReactElement, useState } from "react"
+import React, { ReactElement, useState } from "react"
 
+import { yupResolver } from "@hookform/resolvers/yup"
 import { Icon, Input, InputProps, Text } from "@ui-kitten/components"
 import { StyleSheet } from "react-native"
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
@@ -77,3 +78,5 @@ export const getFormValidators = () => {
       .required(),
   }
 }
+
+export { yup, yupResolver }

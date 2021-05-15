@@ -2,19 +2,11 @@ import React, { useEffect } from "react"
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigation } from "@react-navigation/native"
-import {
-  Button,
-  Divider,
-  Icon,
-  Input,
-  Layout,
-  TopNavigation,
-} from "@ui-kitten/components"
+import { Button, Icon, Input } from "@ui-kitten/components"
 import { Controller, ErrorOption, useForm } from "react-hook-form"
-import { SafeAreaView, StyleSheet, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import * as yup from "yup"
 
-import BackArrow from "../components/BackArrow"
 import {
   EmailInput,
   formStyles,
@@ -22,25 +14,26 @@ import {
   PasswordInput,
   TextError,
 } from "../components/FormUtils"
-import Header from "../components/Header"
+import PageLayout from "../components/PageLayout"
 import { useAuth } from "../hooks/useAuth"
 
 interface RegisterProps {
-  name: string
+  displayName: string
   email: string
   password: string
   confirmPassword?: string
 }
 
 const defaultValues: RegisterProps = {
-  name: "Julien",
+  displayName: "Julien",
   email: "juliencaron@protonmail.com",
   password: "Te$t1234",
+  confirmPassword: "Te$t1234",
 }
 
 const { email, password, requiredString, confirmPassword } = getFormValidators()
 const validationSchema = yup.object().shape({
-  name: requiredString,
+  displayName: requiredString,
   email,
   password,
   confirmPassword,
@@ -70,10 +63,10 @@ const RegisterScreen = () => {
     }
   )
 
-  const onSubmit = handleSubmit(async (data: RegisterProps) => {
-    const { email, password } = data
+  const onSubmit = handleSubmit((data: RegisterProps) => {
+    const { email, password, displayName } = data
 
-    register(email, password).catch((res: any) => {
+    register({ email, password, displayName }).catch((res: any) => {
       const error = formatError(res)
       if (error) setError(...error)
     })
@@ -89,95 +82,89 @@ const RegisterScreen = () => {
   const { errors } = formState
 
   return (
-    <Layout style={{ flex: 1 }}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <TopNavigation
-          title="Register"
-          alignment="center"
-          accessoryLeft={BackArrow}
+    <PageLayout
+      pageTitle="Register"
+      headerProps={{
+        title: "Welcome!",
+        subtitle: "Create an account",
+      }}
+    >
+      <View style={formStyles.formContainer}>
+        <Controller
+          control={control}
+          name="displayName"
+          defaultValue="Julien"
+          render={({ field: { onChange, ...inputProps } }) => (
+            <Input
+              {...inputProps}
+              placeholder="Public Name"
+              accessoryRight={props => <Icon {...props} name="person" />}
+              onChangeText={value => onChange(value)}
+              status={errors.displayName ? "danger" : undefined}
+            />
+          )}
         />
-        <Divider />
-        <View style={{ flex: 1 }}>
-          <Header title="Welcome!" subtitle="Create an account" />
 
-          <Layout style={formStyles.formContainer} level="1">
-            <Controller
-              control={control}
-              name="name"
-              defaultValue="Julien"
-              render={({ field: { onChange, ...inputProps } }) => (
-                <Input
-                  {...inputProps}
-                  placeholder="Public Name"
-                  accessoryRight={props => <Icon {...props} name="person" />}
-                  onChangeText={value => onChange(value)}
-                  status={errors.name ? "danger" : undefined}
-                />
-              )}
+        <TextError message={errors.displayName?.message} />
+
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, ...inputProps } }) => (
+            <EmailInput
+              {...inputProps}
+              style={formStyles.input}
+              onChangeText={value => onChange(value)}
+              status={errors.email ? "danger" : undefined}
             />
+          )}
+        />
 
-            <TextError message={errors.name?.message} />
+        <TextError message={errors.email?.message} />
 
-            <Controller
-              control={control}
-              name="email"
-              render={({ field: { onChange, ...inputProps } }) => (
-                <EmailInput
-                  {...inputProps}
-                  style={formStyles.input}
-                  onChangeText={value => onChange(value)}
-                  status={errors.email ? "danger" : undefined}
-                />
-              )}
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, ...inputProps } }) => (
+            <PasswordInput
+              {...inputProps}
+              style={formStyles.input}
+              onChangeText={value => onChange(value)}
+              status={errors.password ? "danger" : undefined}
             />
+          )}
+        />
 
-            <TextError message={errors.email?.message} />
+        <TextError message={errors.password?.message} />
 
-            <Controller
-              control={control}
-              name="password"
-              render={({ field: { onChange, ...inputProps } }) => (
-                <PasswordInput
-                  {...inputProps}
-                  style={formStyles.input}
-                  onChangeText={value => onChange(value)}
-                  status={errors.password ? "danger" : undefined}
-                />
-              )}
+        <Controller
+          control={control}
+          name="confirmPassword"
+          render={({ field: { onChange, ...inputProps } }) => (
+            <PasswordInput
+              {...inputProps}
+              style={formStyles.input}
+              onChangeText={value => onChange(value)}
+              status={errors.confirmPassword ? "danger" : undefined}
             />
+          )}
+        />
 
-            <TextError message={errors.password?.message} />
+        <TextError message={errors.confirmPassword?.message} />
+      </View>
 
-            <Controller
-              control={control}
-              name="confirmPassword"
-              render={({ field: { onChange, ...inputProps } }) => (
-                <PasswordInput
-                  {...inputProps}
-                  style={formStyles.input}
-                  onChangeText={value => onChange(value)}
-                  status={errors.confirmPassword ? "danger" : undefined}
-                />
-              )}
-            />
-
-            <TextError message={errors.confirmPassword?.message} />
-          </Layout>
-
-          <Button onPress={onSubmit} style={styles.signUpButton} size="giant">
-            SIGN UP
-          </Button>
-          <Button
-            style={styles.signInButton}
-            appearance="ghost"
-            status="basic"
-            onPress={goToLogin}
-          >
-            Already have an account? Login
-          </Button>
-        </View>
-      </SafeAreaView>
-    </Layout>
+      <Button onPress={onSubmit} style={styles.signUpButton} size="giant">
+        SIGN UP
+      </Button>
+      <Button
+        style={styles.signInButton}
+        appearance="ghost"
+        status="basic"
+        onPress={goToLogin}
+      >
+        Already have an account? Login
+      </Button>
+    </PageLayout>
   )
 }
 

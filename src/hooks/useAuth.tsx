@@ -1,5 +1,3 @@
-import "firebase/auth"
-
 import React, {
   createContext,
   ReactNode,
@@ -8,9 +6,19 @@ import React, {
   useState,
 } from "react"
 
-import firebase, { auth } from "../firebase"
+import { auth, db } from "../firebase"
+import { User } from "../models/User"
 
 type Auth = ReturnType<typeof useAuthProvider>
+
+interface AuthCredentials {
+  email: string
+  password: string
+}
+
+interface RegisterProps extends AuthCredentials {
+  displayName: string
+}
 
 const mockFn = (): Promise<any> =>
   new Promise(resolve => resolve(console.warn("no theme provider")))
@@ -39,36 +47,49 @@ export const useAuth = () => {
 
 // Provider hook that creates auth object and handles state
 export default function useAuthProvider() {
-  const [user, setUser] = useState<firebase.User | null>(null)
+  const [user, setUser] = useState<User | null>(null)
 
-  // Wrap any Firebase methods we want to use making sure ...
-  // ... to save the user to state.
-  const login = (email: string, password: string) => {
-    return auth.signInWithEmailAndPassword(email, password).then(res => {
-      setUser(res.user)
-      return res.user
-    })
+  const login = ({ email, password }: AuthCredentials) => {
+    return auth.signInWithEmailAndPassword(email, password)
   }
 
-  const register = (email: string, password: string) => {
-    return auth.createUserWithEmailAndPassword(email, password).then(res => {
-      setUser(res.user)
-      return res.user
+  const register = (userDetails: RegisterProps) => {
+    const { email, password, displayName } = userDetails
+
+    return auth.createUserWithEmailAndPassword(email, password).then(() => {
+      if (!auth.currentUser) return
+
+      const user: User = {
+        uid: auth.currentUser.uid,
+        email,
+        displayName,
+      }
+
+      // Once the user creation has happened successfully,
+      // we can add the currentUser into firestore
+      db.users
+        .doc(user.uid)
+        .set(user)
+        .then(() => setUser(user))
+        .catch(error => {
+          console.log(
+            "Something went wrong with added user to firestore: ",
+            error
+          )
+        })
     })
   }
 
   const logout = () => {
-    return auth.signOut().then(res => {
-      setUser(null)
-    })
+    return auth.signOut().then(() => setUser(null))
   }
 
-  const sendPasswordResetEmail = async (email: string) => {
-    return auth.sendPasswordResetEmail(email).then(res => true)
+  const sendPasswordResetEmail = (email: string) => {
+    return auth.sendPasswordResetEmail(email)
   }
 
-  const confirmPasswordReset = async (code: string, password: string) => {
-    return auth.confirmPasswordReset(code, password).then(res => true)
+  const confirmPasswordReset = (code: string, password: string) => {
+    return auth.confirmPasswordReset(code, password)
   }
 
   // Subscribe to user on mount
@@ -76,8 +97,19 @@ export default function useAuthProvider() {
   // ... component that utilizes this hook to re-render with the ...
   // ... latest auth object.
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      setUser(user)
+    const unsubscribe = auth.onAuthStateChanged(firebaseUser => {
+      if (firebaseUser) {
+        db.users
+          .doc(firebaseUser.uid)
+          .get()
+          .then(doc => setUser(doc.data() || null))
+          .catch(error => {
+            console.error(error)
+            setUser(null)
+          })
+      } else {
+        setUser(null)
+      }
     })
 
     // Cleanup subscription on unmount

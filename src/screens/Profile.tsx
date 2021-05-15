@@ -1,63 +1,71 @@
 import React from "react"
 
 import { useNavigation } from "@react-navigation/native"
-// import DBList from '../components/DBList'
 import {
   Button,
-  Divider,
-  Layout,
+  Icon,
+  StyleService,
   Text,
   TopNavigation,
+  useStyleSheet,
 } from "@ui-kitten/components"
-import { SafeAreaView, StyleSheet, View } from "react-native"
+import { View } from "react-native"
 
-import BackArrow from "../components/BackArrow"
-import ChallengeList from "../components/ChallengeList"
+import { BackArrow, SettingsLink } from "../components/NavigationActions"
+import PageLayout from "../components/PageLayout"
 import { useAuth } from "../hooks/useAuth"
 
 const ProfileScreen = () => {
-  const { user, logout } = useAuth()
+  const { user } = useAuth()
   const navigation = useNavigation()
+  const styles = useStyleSheet(themedStyles)
 
   const goToCreateChallenge = () => navigation.navigate("CreateChallenge")
-
-  // Hacky, we haven't name yet
-  const name = user ? user.email?.slice(0, 6) : "Anonym"
+  const goToSettings = () => navigation.navigate("ProfileSettings")
+  const goToMyChallenges = () => navigation.navigate("MyChallenges")
 
   return (
-    <Layout style={{ flex: 1 }}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <TopNavigation
-          title="Profile"
-          alignment="center"
-          accessoryLeft={BackArrow}
-        />
-        <Divider />
+    <PageLayout pageTitle="Profile" disableTopNavigation>
+      <TopNavigation
+        title="Profile"
+        alignment="center"
+        accessoryLeft={BackArrow}
+        accessoryRight={SettingsLink}
+      />
+      <View style={styles.container}>
+        <Text
+          style={styles.text}
+          category="h1"
+        >{`Hi ${user?.displayName} 👋`}</Text>
+        <Text style={styles.text}>
+          Your amazing app starts here. Open you favourite code editor and start
+          editing this project.
+        </Text>
+        <Button
+          style={styles.button}
+          onPress={goToCreateChallenge}
+          accessoryLeft={props => <Icon {...props} name="plus-outline" />}
+        >
+          CREATE CHALLENGE
+        </Button>
 
-        <View style={styles.container}>
-          <Text style={styles.text} category="h1">{`Hi ${name} 👋`}</Text>
-          <Text style={styles.text}>
-            Your amazing app starts here. Open you favourite code editor and
-            start editing this project.
-          </Text>
-          <Button style={styles.button} onPress={goToCreateChallenge}>
-            CREATE CHALLENGE
-          </Button>
-          <Button style={styles.button} onPress={logout}>
-            LOGOUT
-          </Button>
+        <Button style={styles.button} onPress={goToMyChallenges}>
+          MY CHALLENGE
+        </Button>
 
-          <Text category="h3" style={styles.subtitle}>
-            Current challenge(s)
-          </Text>
-          <ChallengeList />
-        </View>
-      </SafeAreaView>
-    </Layout>
+        <Button style={styles.button} onPress={goToSettings}>
+          SETTINGS
+        </Button>
+      </View>
+    </PageLayout>
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
+  view: {
+    flex: 1,
+    backgroundColor: "background-basic-color-2",
+  },
   container: {
     flex: 1,
     justifyContent: "center",
