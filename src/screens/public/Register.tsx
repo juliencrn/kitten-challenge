@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
+import { Controller, ErrorOption, useForm } from "react-hook-form"
+import { StyleSheet, View } from "react-native"
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigation } from "@react-navigation/native"
 import { Button, Input } from "@ui-kitten/components"
-import { Controller, ErrorOption, useForm } from "react-hook-form"
-import { StyleSheet, View } from "react-native"
 import * as yup from "yup"
 
 import {
@@ -13,11 +13,11 @@ import {
   getFormValidators,
   PasswordInput,
   TextError,
-} from "../../components/FormUtils"
-import PageLayout from "../../components/PageLayout"
-import renderIcon from "../../components/RenderIcon"
-import { useAuth } from "../../hooks/useAuth"
-import { Routes } from "../../router/routes"
+} from "~/components/FormUtils"
+import PageLayout from "~/components/PageLayout"
+import renderIcon from "~/components/RenderIcon"
+import { useAuth } from "~/hooks/useAuth"
+import { Routes } from "~/router/routes"
 
 interface RegisterProps {
   displayName: string

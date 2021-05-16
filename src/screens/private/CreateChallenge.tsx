@@ -1,4 +1,6 @@
 import React from "react"
+import { Controller, useForm } from "react-hook-form"
+import { StyleSheet, View } from "react-native"
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import {
@@ -10,20 +12,18 @@ import {
   SelectItem,
   Toggle,
 } from "@ui-kitten/components"
-import { Controller, useForm } from "react-hook-form"
-import { StyleSheet, View } from "react-native"
 import * as yup from "yup"
 
 import {
   formStyles,
   getFormValidators,
   TextError,
-} from "../../components/FormUtils"
-import PageLayout from "../../components/PageLayout"
-import renderIcon from "../../components/RenderIcon"
-import { addChallenge, toTimestamp } from "../../firebase"
-import { useAuth } from "../../hooks/useAuth"
-import { Challenge } from "../../models/Challenge"
+} from "~/components/FormUtils"
+import PageLayout from "~/components/PageLayout"
+import renderIcon from "~/components/RenderIcon"
+import { addChallenge, toTimestamp } from "~/firebase"
+import { useAuth } from "~/hooks/useAuth"
+import { Challenge } from "~/models/Challenge"
 
 interface ChallengeProps
   extends Omit<Challenge, "uid" | "accessMode" | "price"> {

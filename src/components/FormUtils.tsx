@@ -1,9 +1,9 @@
 import React, { ReactElement, useState } from "react"
+import { StyleSheet } from "react-native"
+import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Icon, Input, InputProps, Text } from "@ui-kitten/components"
-import { StyleSheet } from "react-native"
-import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 import * as yup from "yup"
 
 import renderIcon from "./RenderIcon"

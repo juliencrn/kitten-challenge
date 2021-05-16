@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react"
+import { StyleSheet, View } from "react-native"
 
 import { Button, Card, List, Text } from "@ui-kitten/components"
 import differenceInDays from "date-fns/differenceInDays"
-import { StyleSheet, View } from "react-native"
 
-import imageBg from "../assets/image-article-background-2.jpg"
-import { getChallenges } from "../firebase"
-import { Challenge } from "../models/Challenge"
+import imageBg from "~/assets/image-article-background-2.jpg"
+import { getChallenges } from "~/firebase"
+import { Challenge } from "~/models/Challenge"
+
 import ImageOverlay from "./ImageOverlay"
 import renderIcon from "./RenderIcon"
 

@@ -1,4 +1,4 @@
-import { Timestamp } from "../firebase"
+import { Timestamp } from "~/firebase"
 
 export interface Challenge {
   uid: string

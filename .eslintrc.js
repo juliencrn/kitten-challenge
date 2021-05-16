@@ -48,9 +48,10 @@ module.exports = {
       {
         groups: [
           ["^\\u0000"], // side effect (E.g.`import 'normalize.css'`)
-          ["^react$"],
+          ["^react|react-native$"],
           ["^[^.]"], // Libs
-          ["^../|^~/|^./"],
+          ["^~/"],
+          ["^../|^./"],
           ["\\.module.scss$"],
         ],
       },

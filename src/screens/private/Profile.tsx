@@ -1,4 +1,5 @@
 import React from "react"
+import { View } from "react-native"
 
 import { useNavigation } from "@react-navigation/native"
 import {
@@ -8,13 +9,12 @@ import {
   TopNavigation,
   useStyleSheet,
 } from "@ui-kitten/components"
-import { View } from "react-native"
 
-import { SettingsLink } from "../../components/NavigationActions"
-import PageLayout from "../../components/PageLayout"
-import renderIcon from "../../components/RenderIcon"
-import { useAuth } from "../../hooks/useAuth"
-import { Routes } from "../../router/routes"
+import { SettingsLink } from "~/components/NavigationActions"
+import PageLayout from "~/components/PageLayout"
+import renderIcon from "~/components/RenderIcon"
+import { useAuth } from "~/hooks/useAuth"
+import { Routes } from "~/router/routes"
 
 const ProfileScreen = () => {
   const { user } = useAuth()

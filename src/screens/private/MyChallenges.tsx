@@ -1,7 +1,7 @@
 import React from "react"
 
-import ChallengeList from "../../components/ChallengeList"
-import PageLayout from "../../components/PageLayout"
+import ChallengeList from "~/components/ChallengeList"
+import PageLayout from "~/components/PageLayout"
 
 const MyChallengesScreen = () => {
   return (

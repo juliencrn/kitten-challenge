@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
+import { Controller, ErrorOption, useForm } from "react-hook-form"
+import { StyleSheet, View } from "react-native"
 
 import { useNavigation } from "@react-navigation/native"
 import { Button } from "@ui-kitten/components"
-import { Controller, ErrorOption, useForm } from "react-hook-form"
-import { StyleSheet, View } from "react-native"
 
 import {
   EmailInput,
@@ -13,10 +13,10 @@ import {
   TextError,
   yup,
   yupResolver,
-} from "../../components/FormUtils"
-import PageLayout from "../../components/PageLayout"
-import { useAuth } from "../../hooks/useAuth"
-import { Routes } from "../../router/routes"
+} from "~/components/FormUtils"
+import PageLayout from "~/components/PageLayout"
+import { useAuth } from "~/hooks/useAuth"
+import { Routes } from "~/router/routes"
 
 interface LoginProps {
   email: string

@@ -3,6 +3,7 @@
     "target": "es2019",
     "module": "commonjs",
     "strict": true,
+    "baseUrl": "./",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
@@ -13,6 +14,11 @@
       "./types",
       "./node_modules/@types"
     ],
+    "paths": {
+      "~/*": ["./src/*"],
+      "~test": ["./src/*"]
+    }
   },
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
 }

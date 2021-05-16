@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
+import { Controller, useForm } from "react-hook-form"
+import { StyleSheet, View } from "react-native"
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigation } from "@react-navigation/native"
 import { Button } from "@ui-kitten/components"
-import { Controller, useForm } from "react-hook-form"
-import { StyleSheet, View } from "react-native"
 import * as yup from "yup"
 
 import {
@@ -12,10 +12,10 @@ import {
   formStyles,
   getFormValidators,
   TextError,
-} from "../../components/FormUtils"
-import PageLayout from "../../components/PageLayout"
-import { useAuth } from "../../hooks/useAuth"
-import { Routes } from "../../router/routes"
+} from "~/components/FormUtils"
+import PageLayout from "~/components/PageLayout"
+import { useAuth } from "~/hooks/useAuth"
+import { Routes } from "~/router/routes"
 
 interface ForgotPasswordProps {
   email: string

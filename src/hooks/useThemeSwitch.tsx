@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react"
-
 import { Appearance, useColorScheme } from "react-native"
 
 type ColorScheme = Appearance.AppearancePreferences["colorScheme"]

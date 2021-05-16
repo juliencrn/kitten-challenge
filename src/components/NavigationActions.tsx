@@ -3,7 +3,8 @@ import React from "react"
 import { useNavigation } from "@react-navigation/native"
 import { TopNavigationAction } from "@ui-kitten/components"
 
-import { Routes } from "../router/routes"
+import { Routes } from "~/router/routes"
+
 import renderIcon from "./RenderIcon"
 
 export function BackArrow() {

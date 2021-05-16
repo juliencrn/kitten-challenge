@@ -1,8 +1,8 @@
 import React from "react"
+import { ImageProps } from "react-native"
 
 import { Icon } from "@ui-kitten/components"
 import { RenderProp } from "@ui-kitten/components/devsupport"
-import { ImageProps } from "react-native"
 
 type RenderIcon = (name: string) => RenderProp<Partial<ImageProps>>
 

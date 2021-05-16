@@ -35,20 +35,6 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
 }
 
-/// //////
-// const storage = firebase.storage()
-
-// Create a storage reference from our storage service
-// const storageRef = storage.ref()
-
-// // Create a child reference
-// var imagesRef = storageRef.child('images');
-
-// // Child references can also take paths delimited by '/'
-// var spaceRef = storageRef.child('images/space.jpg');
-
-/// //////
-
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
 export const storage = firebase.storage()

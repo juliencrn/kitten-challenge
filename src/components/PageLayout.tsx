@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import { SafeAreaView, ScrollView, View } from "react-native"
 
 import {
   Divider,
@@ -6,7 +7,6 @@ import {
   TopNavigation,
   useStyleSheet,
 } from "@ui-kitten/components"
-import { SafeAreaView, ScrollView, View } from "react-native"
 
 import Header, { HeaderProps } from "./Header"
 import { BackArrow } from "./NavigationActions"

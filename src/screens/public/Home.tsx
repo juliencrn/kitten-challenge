@@ -1,11 +1,11 @@
 import React, { useState } from "react"
+import { SafeAreaView, StyleSheet, View } from "react-native"
 
 import { useNavigation } from "@react-navigation/native"
 import { Button, Layout, Text } from "@ui-kitten/components"
-import { SafeAreaView, StyleSheet, View } from "react-native"
 
-import { useThemeSwitch } from "../../hooks/useThemeSwitch"
-import { Routes } from "../../router/routes"
+import { useThemeSwitch } from "~/hooks/useThemeSwitch"
+import { Routes } from "~/router/routes"
 
 const heartIcons = ["😻", "💖", "😍", "🥰", "😍", "💝", "😘", "💓", "💕", "🐱"]
 

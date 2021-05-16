@@ -1,9 +1,9 @@
 import { useState } from "react"
-
-import * as ImagePicker from "expo-image-picker"
 import { Alert } from "react-native"
 
-import { StorageRef } from "../firebase"
+import * as ImagePicker from "expo-image-picker"
+
+import { StorageRef } from "~/firebase"
 
 interface ImageSource {
   uri: string

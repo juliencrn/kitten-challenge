@@ -6,8 +6,8 @@ import React, {
   useState,
 } from "react"
 
-import { auth, db } from "../firebase"
-import { User } from "../models/User"
+import { auth, db } from "~/firebase"
+import { User } from "~/models/User"
 
 type Auth = ReturnType<typeof useAuthProvider>
 
