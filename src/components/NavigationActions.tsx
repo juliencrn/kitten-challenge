@@ -3,7 +3,7 @@ import React from "react"
 import { useNavigation } from "@react-navigation/native"
 import { TopNavigationAction } from "@ui-kitten/components"
 
-import { RouteID } from "../Router/Routes"
+import { Routes } from "../router/routes"
 import renderIcon from "./RenderIcon"
 
 export function BackArrow() {
@@ -22,7 +22,7 @@ export function BackArrow() {
 export function SettingsLink() {
   const navigation = useNavigation()
 
-  const goToSettings = () => navigation.navigate(RouteID.PROFILE_SETTINGS)
+  const goToSettings = () => navigation.navigate(Routes.PROFILE_SETTINGS)
 
   return (
     <TopNavigationAction

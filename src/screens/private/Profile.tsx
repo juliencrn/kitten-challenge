@@ -10,29 +10,26 @@ import {
 } from "@ui-kitten/components"
 import { View } from "react-native"
 
-import ImagePickerButton from "../components/ImagePicker"
-import { BackArrow, SettingsLink } from "../components/NavigationActions"
-import PageLayout from "../components/PageLayout"
-import renderIcon from "../components/RenderIcon"
-import { useAuth } from "../hooks/useAuth"
-import { RouteID } from "../Router/Routes"
+import { SettingsLink } from "../../components/NavigationActions"
+import PageLayout from "../../components/PageLayout"
+import renderIcon from "../../components/RenderIcon"
+import { useAuth } from "../../hooks/useAuth"
+import { Routes } from "../../router/routes"
 
 const ProfileScreen = () => {
   const { user } = useAuth()
   const navigation = useNavigation()
   const styles = useStyleSheet(themedStyles)
 
-  const goToCreateChallenge = () =>
-    navigation.navigate(RouteID.CREATE_CHALLENGE)
-  const goToSettings = () => navigation.navigate(RouteID.PROFILE_SETTINGS)
-  const goToMyChallenges = () => navigation.navigate(RouteID.MY_CHALLENGES)
+  const goToCreateChallenge = () => navigation.navigate(Routes.CREATE_CHALLENGE)
+  const goToMyChallenges = () => navigation.navigate(Routes.MY_CHALLENGES)
 
   return (
     <PageLayout pageTitle="Profile" disableTopNavigation>
       <TopNavigation
         title="Profile"
         alignment="center"
-        accessoryLeft={BackArrow}
+        // accessoryLeft={BackArrow}
         accessoryRight={SettingsLink}
       />
       <View style={styles.container}>
@@ -54,12 +51,6 @@ const ProfileScreen = () => {
 
         <Button style={styles.button} onPress={goToMyChallenges}>
           MY CHALLENGE
-        </Button>
-
-        <ImagePickerButton />
-
-        <Button style={styles.button} onPress={goToSettings}>
-          SETTINGS
         </Button>
       </View>
     </PageLayout>

@@ -1,6 +1,5 @@
-export enum RouteID {
+export enum Routes {
   HOME = "Home",
-  DETAILS = "Details",
   PROFILE = "Profile",
   PROFILE_SETTINGS = "ProfileSettings",
   MY_CHALLENGES = "MyChallenges",

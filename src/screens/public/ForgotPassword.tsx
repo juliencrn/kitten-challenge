@@ -12,10 +12,10 @@ import {
   formStyles,
   getFormValidators,
   TextError,
-} from "../components/FormUtils"
-import PageLayout from "../components/PageLayout"
-import { useAuth } from "../hooks/useAuth"
-import { RouteID } from "../Router/Routes"
+} from "../../components/FormUtils"
+import PageLayout from "../../components/PageLayout"
+import { useAuth } from "../../hooks/useAuth"
+import { Routes } from "../../router/routes"
 
 interface ForgotPasswordProps {
   email: string
@@ -52,10 +52,10 @@ const ForgotPasswordScreen = () => {
       })
   })
 
-  const goToLogin = () => navigation.navigate(RouteID.LOGIN)
+  const goToLogin = () => navigation.navigate(Routes.LOGIN)
 
   useEffect(() => {
-    if (user) navigation.navigate(RouteID.PROFILE)
+    if (user) navigation.navigate(Routes.PROFILE)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 

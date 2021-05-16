@@ -4,13 +4,13 @@ import { useNavigation } from "@react-navigation/native"
 import { Avatar, Button, Layout, Text } from "@ui-kitten/components"
 import { ImageSourcePropType, StyleSheet, View } from "react-native"
 
-import kittenAvatar from "../assets/kittenAvatar.jpeg"
-import PageLayout from "../components/PageLayout"
-import renderIcon from "../components/RenderIcon"
-import SettingLine from "../components/SettingLine"
-import { imageStorageRef } from "../firebase"
-import { useAuth } from "../hooks/useAuth"
-import useImagePicker from "../hooks/useImagePicker"
+import kittenAvatar from "../../assets/kittenAvatar.jpeg"
+import PageLayout from "../../components/PageLayout"
+import renderIcon from "../../components/RenderIcon"
+import SettingLine from "../../components/SettingLine"
+import { imageStorageRef } from "../../firebase"
+import { useAuth } from "../../hooks/useAuth"
+import useImagePicker from "../../hooks/useImagePicker"
 
 export enum Gender {
   MALE = "Male",

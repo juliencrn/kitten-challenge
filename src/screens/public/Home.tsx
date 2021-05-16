@@ -4,34 +4,30 @@ import { useNavigation } from "@react-navigation/native"
 import { Button, Layout, Text } from "@ui-kitten/components"
 import { SafeAreaView, StyleSheet, View } from "react-native"
 
-import { useAuth } from "../hooks/useAuth"
-import { RouteID } from "../Router/Routes"
+import { useThemeSwitch } from "../../hooks/useThemeSwitch"
+import { Routes } from "../../router/routes"
 
 const heartIcons = ["😻", "💖", "😍", "🥰", "😍", "💝", "😘", "💓", "💕", "🐱"]
 
 const HomeScreen = () => {
   const [icon, setIcon] = useState(heartIcons[0])
-  const { user, logout } = useAuth()
   const navigation = useNavigation()
+  const { themeName, toggleTheme } = useThemeSwitch()
 
   const changeIcon = () => {
     const index = Math.floor(Math.random() * heartIcons.length)
     setIcon(heartIcons[index])
   }
 
-  const goToDetails = () => navigation.navigate(RouteID.DETAILS)
-  const goToLogin = () => navigation.navigate(RouteID.LOGIN)
-  const goToRegister = () => navigation.navigate(RouteID.REGISTER)
-  const goToProfile = () => navigation.navigate(RouteID.PROFILE)
+  const goToLogin = () => navigation.navigate(Routes.LOGIN)
+  const goToRegister = () => navigation.navigate(Routes.REGISTER)
 
   return (
     <Layout style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.container}>
           <Text style={styles.text} category="h1">
-            {user
-              ? `Welcome ${user.email?.slice(0, 6)} ${icon}`
-              : `Welcome to UI Kitten ${icon}`}
+            {`Welcome to UI Kitten ${icon}`}
           </Text>
           <Text style={styles.text} category="s1">
             It works great in the browser and as a native app!
@@ -47,32 +43,18 @@ const HomeScreen = () => {
           >
             CHANGE ICON
           </Button>
-          <Button onPress={goToDetails} style={styles.button}>
-            OPEN DETAILS
-          </Button>
+          <Button
+            onPress={toggleTheme}
+          >{`SWITCH TO ${themeName} THEME`}</Button>
 
           <View style={{ display: "flex", flexDirection: "row" }}>
-            {!user ? (
-              <>
-                <Button onPress={goToLogin} style={styles.button}>
-                  LOGIN
-                </Button>
-                <Text>{` `}</Text>
-                <Button onPress={goToRegister} style={styles.button}>
-                  REGISTER
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button onPress={logout} style={styles.button}>
-                  LOGOUT
-                </Button>
-                <Text>{` `}</Text>
-                <Button onPress={goToProfile} style={styles.button}>
-                  PROFILE
-                </Button>
-              </>
-            )}
+            <Button onPress={goToLogin} style={styles.button}>
+              LOGIN
+            </Button>
+            <Text>{` `}</Text>
+            <Button onPress={goToRegister} style={styles.button}>
+              REGISTER
+            </Button>
           </View>
         </View>
       </SafeAreaView>

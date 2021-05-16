@@ -18,12 +18,12 @@ import {
   formStyles,
   getFormValidators,
   TextError,
-} from "../components/FormUtils"
-import PageLayout from "../components/PageLayout"
-import renderIcon from "../components/RenderIcon"
-import { addChallenge, toTimestamp } from "../firebase"
-import { useAuth } from "../hooks/useAuth"
-import { Challenge } from "../models/Challenge"
+} from "../../components/FormUtils"
+import PageLayout from "../../components/PageLayout"
+import renderIcon from "../../components/RenderIcon"
+import { addChallenge, toTimestamp } from "../../firebase"
+import { useAuth } from "../../hooks/useAuth"
+import { Challenge } from "../../models/Challenge"
 
 interface ChallengeProps
   extends Omit<Challenge, "uid" | "accessMode" | "price"> {

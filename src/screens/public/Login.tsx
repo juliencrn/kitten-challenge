@@ -13,10 +13,10 @@ import {
   TextError,
   yup,
   yupResolver,
-} from "../components/FormUtils"
-import PageLayout from "../components/PageLayout"
-import { useAuth } from "../hooks/useAuth"
-import { RouteID } from "../Router/Routes"
+} from "../../components/FormUtils"
+import PageLayout from "../../components/PageLayout"
+import { useAuth } from "../../hooks/useAuth"
+import { Routes } from "../../router/routes"
 
 interface LoginProps {
   email: string
@@ -66,11 +66,11 @@ const LoginScreen = () => {
     })
   })
 
-  const goToRegister = () => navigation.navigate(RouteID.REGISTER)
-  const goToForgotPassword = () => navigation.navigate(RouteID.FORGOT_PASSWORD)
+  const goToRegister = () => navigation.navigate(Routes.REGISTER)
+  const goToForgotPassword = () => navigation.navigate(Routes.FORGOT_PASSWORD)
 
   useEffect(() => {
-    if (user) navigation.navigate(RouteID.PROFILE)
+    if (user) navigation.navigate(Routes.PROFILE)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
