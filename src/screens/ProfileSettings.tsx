@@ -8,7 +8,9 @@ import kittenAvatar from "../assets/kittenAvatar.jpeg"
 import PageLayout from "../components/PageLayout"
 import renderIcon from "../components/RenderIcon"
 import SettingLine from "../components/SettingLine"
+import { imageStorageRef } from "../firebase"
 import { useAuth } from "../hooks/useAuth"
+import useImagePicker from "../hooks/useImagePicker"
 
 export enum Gender {
   MALE = "Male",
@@ -31,6 +33,9 @@ const profile = {
 const ProfileSettingsScreen = () => {
   const navigation = useNavigation()
   const { logout } = useAuth()
+  const { user } = useAuth()
+  const userImagesRef = imageStorageRef.child(user?.uid || "anonymous")
+  const [isUploading, openImagePicker] = useImagePicker(userImagesRef)
 
   const goBack = () => navigation.goBack()
 
@@ -47,6 +52,8 @@ const ProfileSettingsScreen = () => {
             size="small"
             status="basic"
             accessoryLeft={renderIcon("camera")}
+            onPress={openImagePicker}
+            disabled={isUploading}
           />
         </View>
         <View style={styles.nameSection}>

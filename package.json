@@ -9,7 +9,7 @@
     "lint": "eslint --ext .ts,.tsx,.js,.jsx src",
     "tsc": "tsc --noEmit",
     "clean": "rm -rf node_modules && npm cache clean --force",
-    "upgrade-interactive": "npm-check --update", 
+    "upgrade-interactive": "npm-check --update",
     "publish": "expo publish"
   },
   "dependencies": {
@@ -36,7 +36,8 @@
     "react-native-svg": "12.1.0",
     "react-native-web": "^0.16.3",
     "react-navigation": "^4.4.4",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "expo-image-picker": "~10.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

@@ -10,6 +10,7 @@ import {
 } from "@ui-kitten/components"
 import { View } from "react-native"
 
+import ImagePickerButton from "../components/ImagePicker"
 import { BackArrow, SettingsLink } from "../components/NavigationActions"
 import PageLayout from "../components/PageLayout"
 import renderIcon from "../components/RenderIcon"
@@ -54,6 +55,8 @@ const ProfileScreen = () => {
         <Button style={styles.button} onPress={goToMyChallenges}>
           MY CHALLENGE
         </Button>
+
+        <ImagePickerButton />
 
         <Button style={styles.button} onPress={goToSettings}>
           SETTINGS

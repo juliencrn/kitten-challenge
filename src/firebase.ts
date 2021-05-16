@@ -35,8 +35,25 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
 }
 
+/// //////
+// const storage = firebase.storage()
+
+// Create a storage reference from our storage service
+// const storageRef = storage.ref()
+
+// // Create a child reference
+// var imagesRef = storageRef.child('images');
+
+// // Child references can also take paths delimited by '/'
+// var spaceRef = storageRef.child('images/space.jpg');
+
+/// //////
+
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
+export const storage = firebase.storage()
+export const storageRef = storage.ref()
+export const imageStorageRef = storageRef.child("images")
 
 type Snap = firebase.firestore.QueryDocumentSnapshot
 
@@ -64,6 +81,7 @@ export const toTimestamp = (date: Date): Timestamp => {
 export type FirebaseUserInfo = firebase.UserInfo
 export type FirebaseUser = firebase.User
 export type Timestamp = firebase.firestore.Timestamp
+export type StorageRef = firebase.storage.Reference
 
 // Methods
 export const addChallenge = (
