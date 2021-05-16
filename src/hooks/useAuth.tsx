@@ -11,13 +11,13 @@ import { User } from "~/models/User"
 
 type Auth = ReturnType<typeof useAuthProvider>
 
-interface AuthCredentials {
+export interface AuthCredentials {
   email: string
   password: string
 }
 
-interface RegisterProps extends AuthCredentials {
-  displayName: string
+export interface RegisterProps extends Omit<User, "uid"> {
+  password: string
 }
 
 const mockFn = (): Promise<any> =>
@@ -53,16 +53,14 @@ export default function useAuthProvider() {
     return auth.signInWithEmailAndPassword(email, password)
   }
 
-  const register = (userDetails: RegisterProps) => {
-    const { email, password, displayName } = userDetails
-
+  const register = ({ email, password, ...userDetails }: RegisterProps) => {
     return auth.createUserWithEmailAndPassword(email, password).then(() => {
       if (!auth.currentUser) return
 
       const user: User = {
+        ...userDetails,
         uid: auth.currentUser.uid,
         email,
-        displayName,
       }
 
       // Once the user creation has happened successfully,

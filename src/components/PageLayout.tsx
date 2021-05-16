@@ -29,31 +29,30 @@ const PageLayout: FC<PropTypes> = ({
 
   const Content = (
     <>
-      {!disableTopNavigation && (
-        <TopNavigation
-          title={pageTitle}
-          alignment="center"
-          accessoryLeft={BackArrow}
-        />
-      )}
-
-      <Divider />
-      <View style={styles.maximize}>
-        {headerProps?.title && <Header {...headerProps} />}
-
-        {children}
-      </View>
+      {headerProps?.title && <Header {...headerProps} />}
+      {children}
     </>
   )
 
-  if (scroll) {
-    return (
-      <SafeAreaView style={styles.container}>
+  return (
+    <SafeAreaView style={styles.container}>
+      {!disableTopNavigation && (
+        <>
+          <TopNavigation
+            title={pageTitle}
+            alignment="center"
+            accessoryLeft={BackArrow}
+          />
+          <Divider />
+        </>
+      )}
+      {scroll ? (
         <ScrollView style={styles.maximize}>{Content}</ScrollView>
-      </SafeAreaView>
-    )
-  }
-  return <SafeAreaView style={styles.container}>{Content}</SafeAreaView>
+      ) : (
+        <View style={styles.maximize}>{Content}</View>
+      )}
+    </SafeAreaView>
+  )
 }
 
 export default PageLayout

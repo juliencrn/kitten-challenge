@@ -36,7 +36,7 @@ const ProfileScreen = () => {
         <Text
           style={styles.text}
           category="h1"
-        >{`Hi ${user?.displayName} 👋`}</Text>
+        >{`Hi ${user?.firstName} 👋`}</Text>
         <Text style={styles.text}>
           Your amazing app starts here. Open you favourite code editor and start
           editing this project.

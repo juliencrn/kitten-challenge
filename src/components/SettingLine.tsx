@@ -1,7 +1,7 @@
 import React from "react"
-import { StyleSheet } from "react-native"
+import { StyleSheet, TouchableOpacity, View } from "react-native"
 
-import { Divider, Layout, LayoutProps, Text } from "@ui-kitten/components"
+import { Divider, Icon, Layout, LayoutProps, Text } from "@ui-kitten/components"
 
 export interface ProfileSettingProps extends LayoutProps {
   hint?: string
@@ -11,18 +11,23 @@ export interface ProfileSettingProps extends LayoutProps {
 const SettingLine = (props: ProfileSettingProps) => {
   const { style, hint, value, ...layoutProps } = props
 
+  const handleClick = () => console.log("clicked")
+
   return (
-    <>
+    <TouchableOpacity style={{ flex: 1 }} onPress={handleClick}>
       <Layout level="1" {...layoutProps} style={[styles.container, style]}>
         {hint && (
           <Text appearance="hint" category="s1">
             {hint}
           </Text>
         )}
-        <Text category="s1">{value}</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text category="s1">{value}</Text>
+          <Icon name="arrow-ios-forward-outline" />
+        </View>
       </Layout>
       <Divider />
-    </>
+    </TouchableOpacity>
   )
 }
 

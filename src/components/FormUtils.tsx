@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react"
+import React, { forwardRef, ReactElement, useState } from "react"
 import { StyleSheet } from "react-native"
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 
@@ -18,47 +18,56 @@ export const TextError = (props: { message?: string }) =>
 export const formStyles = StyleSheet.create({
   formContainer: {
     flex: 1,
-    paddingTop: 32,
     paddingHorizontal: 16,
+    paddingVertical: 16,
   },
   input: {
     marginTop: 16,
   },
 })
 
-export const PasswordInput = (props: InputProps) => {
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
+export const PasswordInput = forwardRef<Input, InputProps>(
+  function PasswordInput(props, ref) {
+    const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
 
-  const onPasswordIconPress = () => setPasswordVisible(!passwordVisible)
+    const onPasswordIconPress = () => setPasswordVisible(!passwordVisible)
 
+    return (
+      <Input
+        ref={ref}
+        placeholder="Password"
+        accessoryRight={(p: any): ReactElement => (
+          <TouchableWithoutFeedback onPress={onPasswordIconPress}>
+            <Icon {...p} name={passwordVisible ? "eye-off" : "eye"} />
+          </TouchableWithoutFeedback>
+        )}
+        secureTextEntry={!passwordVisible}
+        autoCapitalize="none"
+        autoCompleteType="password"
+        textContentType="password"
+        {...props}
+      />
+    )
+  }
+)
+
+export const EmailInput = forwardRef<Input, InputProps>(function EmailInput(
+  props,
+  ref
+) {
   return (
     <Input
-      placeholder="Password"
-      accessoryRight={(p: any): ReactElement => (
-        <TouchableWithoutFeedback onPress={onPasswordIconPress}>
-          <Icon {...p} name={passwordVisible ? "eye-off" : "eye"} />
-        </TouchableWithoutFeedback>
-      )}
-      secureTextEntry={!passwordVisible}
+      ref={ref}
+      placeholder="Email"
+      accessoryRight={renderIcon("email-outline")}
       autoCapitalize="none"
-      autoCompleteType="password"
-      textContentType="password"
+      autoCompleteType="email"
+      textContentType="emailAddress"
+      keyboardType="email-address"
       {...props}
     />
   )
-}
-
-export const EmailInput = (props: InputProps) => (
-  <Input
-    placeholder="Email"
-    accessoryRight={renderIcon("email-outline")}
-    autoCapitalize="none"
-    autoCompleteType="email"
-    textContentType="emailAddress"
-    keyboardType="email-address"
-    {...props}
-  />
-)
+})
 
 export const getFormValidators = () => {
   return {
