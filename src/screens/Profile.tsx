@@ -3,7 +3,6 @@ import React from "react"
 import { useNavigation } from "@react-navigation/native"
 import {
   Button,
-  Icon,
   StyleService,
   Text,
   TopNavigation,
@@ -13,6 +12,7 @@ import { View } from "react-native"
 
 import { BackArrow, SettingsLink } from "../components/NavigationActions"
 import PageLayout from "../components/PageLayout"
+import renderIcon from "../components/RenderIcon"
 import { useAuth } from "../hooks/useAuth"
 import { RouteID } from "../Router/Routes"
 
@@ -46,7 +46,7 @@ const ProfileScreen = () => {
         <Button
           style={styles.button}
           onPress={goToCreateChallenge}
-          accessoryLeft={props => <Icon {...props} name="plus-outline" />}
+          accessoryLeft={renderIcon("plus-outline")}
         >
           CREATE CHALLENGE
         </Button>

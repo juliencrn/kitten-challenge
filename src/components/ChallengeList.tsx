@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import { Button, Card, Icon, List, Text } from "@ui-kitten/components"
+import { Button, Card, List, Text } from "@ui-kitten/components"
 import differenceInDays from "date-fns/differenceInDays"
 import { StyleSheet, View } from "react-native"
 
@@ -8,6 +8,7 @@ import imageBg from "../assets/image-article-background-2.jpg"
 import { getChallenges } from "../firebase"
 import { Challenge } from "../models/Challenge"
 import ImageOverlay from "./ImageOverlay"
+import renderIcon from "./RenderIcon"
 
 const ChallengeCard = ({ item }: { item: Challenge }) => {
   const deadline = item.deadline.toDate()
@@ -27,7 +28,7 @@ const ChallengeCard = ({ item }: { item: Challenge }) => {
             style={styles.iconButton}
             appearance="ghost"
             status="control"
-            accessoryLeft={props => <Icon {...props} name="calendar-outline" />}
+            accessoryLeft={renderIcon("calendar-outline")}
           >
             {`${daysLeft} days left or pay ${item.price} €`}
           </Button>

@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import {
   Button,
   Datepicker,
-  Icon,
   IndexPath,
   Input,
   Select,
@@ -21,6 +20,7 @@ import {
   TextError,
 } from "../components/FormUtils"
 import PageLayout from "../components/PageLayout"
+import renderIcon from "../components/RenderIcon"
 import { addChallenge, toTimestamp } from "../firebase"
 import { useAuth } from "../hooks/useAuth"
 import { Challenge } from "../models/Challenge"
@@ -87,9 +87,7 @@ const CreateChallengeScreen = () => {
               placeholder="What is your goal ?"
               onChangeText={value => onChange(value)}
               status={errors.title ? "danger" : undefined}
-              accessoryRight={props => (
-                <Icon {...props} name="checkmark-circle-2-outline" />
-              )}
+              accessoryRight={renderIcon("checkmark-circle-2-outline")}
             />
           )}
         />
@@ -107,7 +105,7 @@ const CreateChallengeScreen = () => {
               style={{ marginTop: 16 }}
               onSelect={nextDate => onChange(nextDate)}
               status={errors.deadline ? "danger" : undefined}
-              accessoryRight={props => <Icon {...props} name="calendar" />}
+              accessoryRight={renderIcon("calendar")}
             />
           )}
         />

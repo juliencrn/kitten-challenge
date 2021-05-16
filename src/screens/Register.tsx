@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useNavigation } from "@react-navigation/native"
-import { Button, Icon, Input } from "@ui-kitten/components"
+import { Button, Input } from "@ui-kitten/components"
 import { Controller, ErrorOption, useForm } from "react-hook-form"
 import { StyleSheet, View } from "react-native"
 import * as yup from "yup"
@@ -15,6 +15,7 @@ import {
   TextError,
 } from "../components/FormUtils"
 import PageLayout from "../components/PageLayout"
+import renderIcon from "../components/RenderIcon"
 import { useAuth } from "../hooks/useAuth"
 import { RouteID } from "../Router/Routes"
 
@@ -99,7 +100,7 @@ const RegisterScreen = () => {
             <Input
               {...inputProps}
               placeholder="Public Name"
-              accessoryRight={props => <Icon {...props} name="person" />}
+              accessoryRight={renderIcon("person")}
               onChangeText={value => onChange(value)}
               status={errors.displayName ? "danger" : undefined}
             />

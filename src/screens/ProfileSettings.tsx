@@ -1,11 +1,12 @@
 import React from "react"
 
 import { useNavigation } from "@react-navigation/native"
-import { Avatar, Button, Icon, Layout, Text } from "@ui-kitten/components"
+import { Avatar, Button, Layout, Text } from "@ui-kitten/components"
 import { ImageSourcePropType, StyleSheet, View } from "react-native"
 
 import kittenAvatar from "../assets/kittenAvatar.jpeg"
 import PageLayout from "../components/PageLayout"
+import renderIcon from "../components/RenderIcon"
 import SettingLine from "../components/SettingLine"
 import { useAuth } from "../hooks/useAuth"
 
@@ -45,7 +46,7 @@ const ProfileSettingsScreen = () => {
             style={styles.photoButton}
             size="small"
             status="basic"
-            accessoryLeft={props => <Icon {...props} name="camera" />}
+            accessoryLeft={renderIcon("camera")}
           />
         </View>
         <View style={styles.nameSection}>

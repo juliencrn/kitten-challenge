@@ -6,6 +6,8 @@ import { StyleSheet } from "react-native"
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 import * as yup from "yup"
 
+import renderIcon from "./RenderIcon"
+
 export const TextError = (props: { message?: string }) =>
   props?.message ? (
     <Text status="danger" style={{ marginTop: 4 }}>
@@ -49,7 +51,7 @@ export const PasswordInput = (props: InputProps) => {
 export const EmailInput = (props: InputProps) => (
   <Input
     placeholder="Email"
-    accessoryRight={props => <Icon {...props} name="email-outline" />}
+    accessoryRight={renderIcon("email-outline")}
     autoCapitalize="none"
     autoCompleteType="email"
     textContentType="emailAddress"
